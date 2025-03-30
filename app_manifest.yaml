@@ -1,0 +1,140 @@
+_metadata:
+  major_version: 1
+  minor_version: 1
+
+display_information:
+  name: "Ninety.io for Slack"
+  description: "Manage your Ninety.io workspace directly from Slack. Create and track Headlines, To-Dos, Issues, and Rocks, plus manage meetings and more."
+  background_color: "#2c2d30"
+  long_description: |
+    The Ninety.io app for Slack brings your team's headlines, to-dos, and issues directly into your Slack workspace.
+    
+    Features:
+    • Create and manage Ninety.io items directly from Slack
+    • Search and view existing items
+    • Subscribe to updates and receive notifications
+    • Attach Slack conversations to items
+    • Set due dates and track progress
+    • Rich previews of Ninety.io items
+    
+    Installation Instructions:
+    1. Click "Add to Slack" to install the app
+    2. Grant the requested permissions
+    3. Configure your Ninety.io credentials in the app settings
+    4. Start using the app with /ninety commands or message shortcuts
+    
+    For detailed setup instructions and support, visit:
+    https://github.com/yourusername/ninety-slack-connector
+
+settings:
+  interactivity:
+    is_enabled: true
+  socket_mode_enabled: true
+  token_rotation_enabled: false
+  org_deploy_enabled: false
+
+features:
+  app_home:
+    home_tab_enabled: true
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: false
+  bot_user:
+    display_name: "Ninety.io"
+    always_online: true
+  shortcuts:
+    # Message shortcuts (context menu)
+    - name: "Create in Ninety.io"
+      type: "message"
+      callback_id: "create_from_message"
+      description: "Create a new item from this message"
+    
+    - name: "Add as Comment"
+      type: "message"
+      callback_id: "add_as_comment"
+      description: "Add this message as a comment to any Ninety.io item"
+    
+    - name: "Convert to Milestone"
+      type: "message"
+      callback_id: "convert_to_milestone"
+      description: "Convert this message into a Rock milestone"
+    
+    - name: "Update Definition of Done"
+      type: "message"
+      callback_id: "update_definition_of_done"
+      description: "Add this message to a Rock's Definition of Done"
+    
+    - name: "Mark as Repeating"
+      type: "message"
+      callback_id: "mark_as_repeating"
+      description: "Set this as a repeating to-do or rock"
+    
+    - name: "Set Privacy"
+      type: "message"
+      callback_id: "set_privacy"
+      description: "Toggle between team and private visibility"
+    
+    # Global shortcuts
+    - name: "Quick Create"
+      type: "global"
+      callback_id: "quick_create"
+      description: "Quickly create any Ninety.io item"
+    
+    - name: "Search Items"
+      type: "global"
+      callback_id: "search_items"
+      description: "Search across all Ninety.io items"
+
+  unfurl_domains:
+    - "ninety.io"
+    - "app.ninety.io"
+
+  event_subscriptions:
+    bot_events:
+      - message.channels
+      - message.groups
+      - message.im
+      - message.mpim
+      - reaction_added
+      - reaction_removed
+      - app_mention
+
+oauth_config:
+  scopes:
+    bot:
+      - commands
+      - chat:write
+      - chat:write.public
+      - reactions:read
+      - reactions:write
+      - users:read
+      - users:read.email
+      - channels:read
+      - groups:read
+      - im:read
+      - mpim:read
+      - app_mentions:read
+      - links:read
+      - links:write
+
+  slash_commands:
+    - command: "/ninety"
+      description: "Access Ninety.io features"
+      usage_hint: "[help|create|search|list|subscribe|due]"
+    - command: "/ninety-create"
+      description: "Create a new Ninety.io item"
+      usage_hint: "[headline|todo|issue|rock] [title]"
+    - command: "/ninety-search"
+      description: "Search Ninety.io items"
+      usage_hint: "[query]"
+    - command: "/ninety-list"
+      description: "List recent Ninety.io items"
+      usage_hint: "[headlines|todos|issues|rocks]"
+    - command: "/ninety-rock"
+      description: "Create a new Rock"
+      usage_hint: "[title] [description]"
+    - command: "/ninety-subscribe"
+      description: "Subscribe to Ninety.io item updates"
+      usage_hint: "[item-id]"
+    - command: "/ninety-due"
+      description: "Set or view due dates"
+      usage_hint: "[item-id] [date]" 

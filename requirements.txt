@@ -1,0 +1,13 @@
+slack-bolt>=1.18.0
+selenium>=4.10.0
+webdriver-manager>=4.0.0
+python-dotenv>=1.0.0
+sentry-sdk>=1.28.1
+redis>=4.6.0
+ratelimit>=2.2.1
+prometheus-client>=0.17.1
+structlog>=23.1.0
+requests>=2.31.0
+typing-extensions>=4.7.1
+flask==2.3.3
+gunicorn==21.2.0 

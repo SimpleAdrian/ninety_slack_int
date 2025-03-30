@@ -1,0 +1,169 @@
+display_information:
+  name: "Ninety.io for Slack"
+  description: "Integrate Ninety.io with your Slack workspace"
+  background_color: "#0052CC"
+  long_description: |
+    The Ninety.io app for Slack brings your team's headlines, to-dos, and issues directly into your Slack workspace.
+    
+    Features:
+    • Create and manage Ninety.io items directly from Slack
+    • Search and view existing items
+    • Subscribe to updates and receive notifications
+    • Attach Slack conversations to items
+    • Set due dates and track progress
+    • Rich previews of Ninety.io items
+    
+    Installation Instructions:
+    1. Click "Add to Slack" to install the app
+    2. Grant the requested permissions
+    3. Configure your Ninety.io credentials in the app settings
+    4. Start using the app with /ninety commands or message shortcuts
+    
+    For detailed setup instructions and support, visit:
+    https://github.com/yourusername/ninety-slack-connector
+
+features:
+  app_home:
+    home_tab_enabled: true
+    messages_tab_enabled: true
+    messages_tab_read_only_enabled: false
+  bot_user:
+    display_name: Ninety.io
+    always_online: true
+  unfurl_domains:
+    - app.ninety.io
+  slash_commands:
+    - command: /ninety
+      description: "Access Ninety.io features"
+      usage_hint: "help"
+      should_escape: false
+    - command: /ninety-create
+      description: "Create a new Ninety.io item"
+      usage_hint: "[headline|todo|issue] [title]"
+      should_escape: false
+    - command: /ninety-search
+      description: "Search Ninety.io items"
+      usage_hint: "[query]"
+      should_escape: false
+    - command: /ninety-list
+      description: "List recent Ninety.io items"
+      usage_hint: "[headlines|todos|issues]"
+      should_escape: false
+    - command: /ninety-subscribe
+      description: "Subscribe to Ninety.io item updates"
+      usage_hint: "[item-id]"
+      should_escape: false
+    - command: /ninety-due
+      description: "Set or view due dates"
+      usage_hint: "[item-id] [date]"
+      should_escape: false
+
+oauth_config:
+  scopes:
+    bot:
+      - channels:history
+      - channels:read
+      - chat:write
+      - commands
+      - groups:history
+      - groups:read
+      - im:history
+      - im:read
+      - im:write
+      - mpim:history
+      - mpim:read
+      - team:read
+      - users:read
+      - users:read.email
+      - reactions:read
+      - reactions:write
+      - links:read
+      - links:write
+
+settings:
+  event_subscriptions:
+    bot_events:
+      - link_shared
+      - app_mention
+      - app_home_opened
+      - message.channels
+      - message.groups
+      - message.im
+      - message.mpim
+  interactivity:
+    is_enabled: true
+  org_deploy_enabled: false
+  socket_mode_enabled: true
+  token_rotation_enabled: false
+
+message_menu_options:
+  - name: Create Headline
+    type: message
+    callback_id: create_headline
+    description: Create a new headline from this message
+  - name: Create To-Do
+    type: message
+    callback_id: create_todo
+    description: Create a new to-do from this message
+  - name: Create Issue
+    type: message
+    callback_id: create_issue
+    description: Create a new issue from this message
+  - name: Search Items
+    type: message
+    callback_id: search_items
+    description: Search Ninety.io items
+  - name: Attach Conversation
+    type: message
+    callback_id: attach_conversation
+    description: Attach this conversation to an existing item
+  - name: Set Due Date
+    type: message
+    callback_id: set_due_date
+    description: Set or update due date for an item
+  - name: Subscribe
+    type: message
+    callback_id: subscribe_item
+    description: Subscribe to updates for an item
+
+shortcuts:
+  - name: "Create Headline"
+    type: "global"
+    callback_id: "create_headline_shortcut"
+    description: "Create a new Ninety.io headline"
+  - name: "Create To-do"
+    type: "global"
+    callback_id: "create_todo_shortcut"
+    description: "Create a new Ninety.io to-do"
+  - name: "Create Issue"
+    type: "global"
+    callback_id: "create_issue_shortcut"
+    description: "Create a new Ninety.io issue"
+  - name: "Search Items"
+    type: "global"
+    callback_id: "search_items_shortcut"
+    description: "Search Ninety.io items"
+
+# Add message shortcuts
+  - name: "Create Headline from Message"
+    type: "message"
+    callback_id: "create_headline_message"
+    description: "Create a Ninety.io headline from this message"
+  - name: "Create To-do from Message"
+    type: "message"
+    callback_id: "create_todo_message"
+    description: "Create a Ninety.io to-do from this message"
+  - name: "Create Issue from Message"
+    type: "message"
+    callback_id: "create_issue_message"
+    description: "Create a Ninety.io issue from this message"
+  - name: "Attach to Existing Item"
+    type: "message"
+    callback_id: "attach_to_item_message"
+    description: "Attach this message to an existing Ninety.io item"
+
+commands:
+  - command: /ninety
+    description: Interact with Ninety.io
+    usage_hint: "create|search|help [options]"
+    should_escape: true 
